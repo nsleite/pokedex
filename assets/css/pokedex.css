@@ -143,6 +143,32 @@
     margin-right: 2rem;
 }
 
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0rem;
+}
+
+.loadPage{
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2.4rem;
+    color: #555;
+    box-shadow: 2px 2px 2px #555;
+}
+
+.loadPage:hover{
+    border: 0.5px solid #BBB;
+    box-shadow: none;
+    background-color: #DDD;
+    color: #777;
+}
+
 @media screen and (min-width: 400px){
     .pokemons{
         grid-template-columns: 1fr 1fr;

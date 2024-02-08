@@ -10,7 +10,7 @@ function DetailToPokemon(pokemonDetails){
     var pokemon = new Pokemon();
 
     pokemon.name = pokemonDetails.name;
-    pokemon.id = pokemonDetails.order;
+    pokemon.id = pokemonDetails.id;
     pokemon.img = pokemonDetails.sprites.other.dream_world.front_default;
 
     const types = pokemonDetails.types.map((slot) => slot.type.name);
@@ -22,7 +22,7 @@ function DetailToPokemon(pokemonDetails){
     return pokemon;
 }
 
-pokeApi.getPokemons = (offset=0, limit=350) => {
+pokeApi.getPokemons = (offset=0, limit=15) => {
     const URL = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
     return fetch(URL)

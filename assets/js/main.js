@@ -1,3 +1,9 @@
+var offset = 0;
+const LIMIT = 15;
+const MAXPOKEMONS = 649;
+
+const pokemonList = document.getElementById('pokemonList');
+const loadButton = document.getElementById('loadButton');
 
 let PokemonToHtmlLi = (pokemon) => {
     return `
@@ -17,14 +23,29 @@ let PokemonToHtmlLi = (pokemon) => {
             `
 }
 
-const pokemonList = document.getElementById('pokemonList')
+function loadPokemons(offset, limit){
 
-pokeApi.getPokemons()
-    .then((pokemons = []) => {
-        console.log(pokemons[0])
-        var newHtml = pokemons.map(PokemonToHtmlLi).join('');
-        pokemonList.innerHTML = newHtml;
-    })
-    .finally(() => console.log('success'))
+    pokeApi.getPokemons(offset, limit)
+        .then((pokemons = []) => {
+            console.log(pokemons[0])
+            var newHtml = pokemons.map(PokemonToHtmlLi).join('');
+            pokemonList.innerHTML += newHtml;
+        })
+}
 
-console.log(10+10)
+loadPokemons(offset, LIMIT);
+
+loadButton.addEventListener('click', loadMore)
+
+function loadMore(){
+    offset += LIMIT;
+    var nextPage = offset + LIMIT
+    if(nextPage > MAXPOKEMONS){
+        loadPokemons(offset, MAXPOKEMONS%LIMIT);
+        loadButton.parentElement.removeChild(loadButton);
+        return;
+    }
+    loadPokemons(offset, LIMIT)
+}   
+
+
